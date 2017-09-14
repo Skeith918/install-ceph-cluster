@@ -118,3 +118,6 @@ ceph-deploy --overwrite-conf config push files-rgw-01 files-rgw-02
 ```
 systemctl restart ceph-radosgw.service
 ```
+### On the files servers
+#### Erasure Code Profile creation
+- 
