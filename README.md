@@ -7,6 +7,7 @@ This is an tutorial to install a ceph cluster
 - 3 servers for storage (1 disk is already used for system, the 2 others are not used and partitionned)
 - 2 server for gateway
 - 1 server for admin
+
 All servers working on Debian 8 and have a domain name.
 
 - files-01.example.com files-02.example.com files-03.example.com
