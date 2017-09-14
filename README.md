@@ -75,9 +75,9 @@ ceph-deploy mon create-initial
 ```
 ceph-deploy admin files-01 files-02 files-03
 ```
-- Deploy an manager (use the server you want, i use the files-01 server)
+- Deploy a manager on each servers
 ```
-ceph-deploy mgr create files-01
+ceph-deploy mgr create files-01 files-02 files-03
 ```
 #### OSD Installation 
 - Delete partition table of the not used disks in storage servers (in my case /dev/sdb and /dev/sdc on each server)
