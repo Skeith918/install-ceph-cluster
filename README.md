@@ -167,3 +167,16 @@ crushtool -i better-crush.map --test --show-bad-mappings \
 ```
 ceph osd setcrushmap -i better-crush.map
 ```
+#### Pool creation
+- Create a erasure pool, for the number of pg  choose you can create 32 pg per OSD max, in my case the max is 192 = 32x6 but i choose 96 pg.
+```
+ceph osd pool create data 96 96 erasure data
+```
+- You can check for some error with the command 
+```
+ceph -s
+```
+or 
+```
+ceph -w
+```
