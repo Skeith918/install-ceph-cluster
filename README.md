@@ -25,7 +25,14 @@ ssh-keygen
 ```
 - Add your public key in all server's authorized_keys
 - Configure your servers to connect to him with ssh-key
-- 
+- Create hostname redirection in your /etc/hosts for all your servers 
+```
+1.1.1.1   files-01
+2.2.2.2   files-02
+3.3.3.3   files-03
+1.1.2.1   files-rgw-01
+1.1.2.3   files-rgw-02
+```
 - Add release key
 ```
 wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
