@@ -146,8 +146,8 @@ ceph osd getcrushmap > crush.map
 ```
 crushtool --decompile crush.map > crush.txt
 ```
-- On the crush.txt, in your rule section matching with the name of erasure profile, check the type in "chooseleaf indep" line is "osd"
-- Change the min_size to the value of numbers of disk loss capacity (always 2 in my case ^^)
+- On the crush.txt, in your rule section matching with the name of erasure profile, check the type in **"chooseleaf indep"** line is **"osd"**
+- Change the **min_size** to the value of numbers of disk loss capacity (always 2 in my case ^^)
 - My ruleset looks like this:
 ```
 rule data {
@@ -162,7 +162,7 @@ rule data {
         step emit
 }
 ```
-- Recompile the modified crush.txt file 
+- Recompile the modified **crush.txt** file 
 ```
 crushtool --compile crush.txt -o better-crush.map
 ```
@@ -174,7 +174,7 @@ crushtool -i better-crush.map --test --show-bad-mappings \
    --num-rep 6 \
    --min-x 1 --max-x $((1024 * 1024))
 ```
-- If you have some "bad mapping" error, change the crush.txt.
+- If you have some "bad mapping" error, change the **crush.txt**.
 - If the test was successful reinjected the modified map
 ```
 ceph osd setcrushmap -i better-crush.map
