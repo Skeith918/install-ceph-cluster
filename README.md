@@ -8,13 +8,14 @@ This is an tutorial to install a ceph cluster
 - 2 server for gateway
 - 1 server for admin
 
-All servers working on Debian 8.
-All servers have a domain name.
+All servers working on Debian 8 and have a domain name.
 
 - files-01.example.com files-02.example.com files-03.example.com
 - files-rgw-01.example.com fles-rgw-02.example.com
 - files-admin.example.com
 
+On storage servers, 1 disk is already used for system, the 2 others are not partitionned.
+ 
 ## Installation
 
 ##### On Admin
@@ -59,4 +60,23 @@ ceph-deploy new files-01 files-02 files-03
 ```
 ceph-deploy install --release luminous files-01 files-02 files-03
 ```
-
+- Deploy the monitors in your servers and create keys
+```
+ceph-deploy mon create-initial
+```
+- Deploy the keys in your servers
+```
+ceph-deploy admin files-01 files-02 files-03
+```
+- Deploy an manager (use the server you want, i use the files-01 server)
+```
+ceph-deploy mgr create files-01
+```
+- Delete partition table of the not used disks in storage servers (in my case /dev/sdb and /dev/sdc on each server)
+```
+ceph-deploy disk zap files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-03:sdb files-03:sdc
+```
+- Create the osd 
+```
+ceph-deploy osd create files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-03:sdb files-03:sdc
+```
