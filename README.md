@@ -4,24 +4,19 @@ This is an tutorial to install a ceph cluster
 
 ### My infrastructure
 
-##### 3 servers for storage :
-- 3 disks on each server : 1 disk for system and 1 monitor, 1 disk for OSD = 2 OSD per servers = 6 disks and OSDs
-
-##### 2 server for gateway
-##### 1 server for admin
-
-### My target
-- Have a cluster distributed on 3 servers
-- Have a loss capacity of 2 drives without loss of data
-- Have 2 gateway in active-active mode to access cluster data
-
+- 3 servers for storage (1 disk is already used for system, the 2 others are not used and partitionned)
+- 2 server for gateway
+- 1 server for admin
 All servers working on Debian 8 and have a domain name.
 
 - files-01.example.com files-02.example.com files-03.example.com
 - files-rgw-01.example.com fles-rgw-02.example.com
 - files-admin.example.com
 
-On storage servers, 1 disk is already used for system, the 2 others are not partitionned.
+### My target
+- Have a cluster distributed on 3 servers with on each server 1 disk for system and 1 monitor and one OSD for each not used disk
+- Have a loss capacity of 2 drives without loss of data
+- Have 2 gateway in active-active mode to access cluster data
  
 ## Installation
 
