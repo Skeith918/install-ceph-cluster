@@ -4,9 +4,12 @@ This is an tutorial to install a ceph cluster
 
 ## My infrastructure
 
-- 3 servers for storage (3 disks : 1 disk for system and 1 monitor, 1 disk for OSD = 2 OSD per servers)
-- 2 server for gateway
-- 1 server for admin
+##### 3 servers for storage :
+- 3 disks on each server : 1 disk for system and 1 monitor, 1 disk for OSD = 2 OSD per servers = 6 disks and OSDs
+- A configuration to have a margin of loss of 2 disks out of 6.
+
+##### 2 server for gateway
+##### 1 server for admin
 
 All servers working on Debian 8 and have a domain name.
 
@@ -80,3 +83,4 @@ ceph-deploy disk zap files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-0
 ```
 ceph-deploy osd create files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-03:sdb files-03:sdc
 ```
+- 
