@@ -120,4 +120,33 @@ systemctl restart ceph-radosgw.service
 ```
 ### On the files servers
 #### Erasure Code Profile creation
-- 
+- Create the erasure code profile named data with the data replication on 4 disks and a loss capacity of 2 disks
+```
+ceph osd erasure-code-profile set data k=4 m=2 crush-failure-domain=osd
+```
+- However, in my configuration i noticed an error, the crush rule are not perfectly configured automatically with the erasure profile, this cause some errors in pool creation.
+- If you meet a "creating+incomplete" error when you creating a pool you must configured the crush map min_size parameters by the value of numbers of disk loss capacity (in my case 2).
+- For this, export your crushmap in a file
+```
+ceph osd getcrushmap > crush.map
+```
+- Decompile the crushmap
+```
+crushtool --decompile crush.map > crush.txt
+```
+- On the crush.txt, in your rule section matching with the name of erasure profile, check the type in "chooseleaf indep" line is "osd"
+- Change the min_size to the value of numbers of disk loss capacity (always 2 in my case ^^)
+- My ruleset looks like this:
+```
+rule data {
+        ruleset 1
+        type 3
+        min_size 2
+        max_size 6
+        step set_chooseleaf_tries 5
+        step set_choose_tries 100
+        step take default
+        step chooseleaf indep 0 type osd
+        step emit
+}
+```
