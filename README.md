@@ -118,6 +118,9 @@ ceph-deploy --overwrite-conf config push files-rgw-01 files-rgw-02
 ```
 systemctl restart ceph-radosgw.service
 ```
+### On the gateway servers
+#### User creation
+- You can access to the gateway with Amazon S3 or Openstack Swift. we create a user for these 2 platforms
 ### On the files servers
 #### Erasure Code Profile creation
 - Create the erasure code profile named data with the data replication on 4 disks and a loss capacity of 2 disks
