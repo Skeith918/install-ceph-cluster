@@ -150,3 +150,20 @@ rule data {
         step emit
 }
 ```
+- Recompile the modified crush.txt file 
+```
+crushtool --compile crush.txt -o better-crush.map
+```
+- Check with a test if the new crushmap is really corrected
+```
+crushtool -i better-crush.map --test --show-bad-mappings \
+   --show-choose-tries \
+   --rule 1 \
+   --num-rep 6 \
+   --min-x 1 --max-x $((1024 * 1024))
+```
+- If you have some "bad mapping" error, change the crush.txt.
+- If the test was successful reinjected the modified map
+```
+ceph osd setcrushmap -i better-crush.map
+```
