@@ -21,9 +21,9 @@ All servers working on Debian 8 and have a domain name.
  
 ## Installation
 
-##### On Admin
+### On the Admin server
 
-###### Preparation 
+#### Preparation 
 - Generate ssh key pair without passphrase
 ```
 ssh-keygen
@@ -57,7 +57,7 @@ mkdir ~/ceph-cluster
 ```
 - Note that you must be in this directory to use ceph-deploy command
 
-###### Monitors installation
+#### Monitors installation
 
 - In your ceph-cluster directory, create your cluster with your 3 storage servers
 ```
@@ -79,7 +79,7 @@ ceph-deploy admin files-01 files-02 files-03
 ```
 ceph-deploy mgr create files-01
 ```
-###### OSD Installation 
+#### OSD Installation 
 - Delete partition table of the not used disks in storage servers (in my case /dev/sdb and /dev/sdc on each server)
 ```
 ceph-deploy disk zap files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-03:sdb files-03:sdc
@@ -88,7 +88,7 @@ ceph-deploy disk zap files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-0
 ```
 ceph-deploy osd create files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-03:sdb files-03:sdc
 ```
-###### Gateway Installation
+#### Gateway Installation
 - Deploy ceph and radosgw on Gateway server
 ```
 ceph-deploy install --rgw --release luminous files-rgw-01 files-rgw-02
