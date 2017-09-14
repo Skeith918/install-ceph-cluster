@@ -23,6 +23,7 @@ All servers working on Debian 8 and have a domain name.
 
 ##### On Admin
 
+###### Preparation 
 - Generate ssh key pair without passphrase
 ```
 ssh-keygen
@@ -55,6 +56,9 @@ apt install ceph-deploy
 mkdir ~/ceph-cluster
 ```
 - Note that you must be in this directory to use ceph-deploy command
+
+###### Monitors installation
+
 - In your ceph-cluster directory, create your cluster with your 3 storage servers
 ```
 ceph-deploy new files-01 files-02 files-03
@@ -75,6 +79,7 @@ ceph-deploy admin files-01 files-02 files-03
 ```
 ceph-deploy mgr create files-01
 ```
+###### OSD Installation 
 - Delete partition table of the not used disks in storage servers (in my case /dev/sdb and /dev/sdc on each server)
 ```
 ceph-deploy disk zap files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-03:sdb files-03:sdc
@@ -83,4 +88,33 @@ ceph-deploy disk zap files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-0
 ```
 ceph-deploy osd create files-01:sdb files-01:sdc files-02:sdb files-02:sdc files-03:sdb files-03:sdc
 ```
-- Deploy the Gateway
+###### Gateway Installation
+- Deploy ceph and radosgw on Gateway server
+```
+ceph-deploy install --rgw --release luminous files-rgw-01 files-rgw-02
+```
+- Deploy admin keys on Gateway server
+```
+ceph-deploy admin files-rgw-01 files-rgw-02
+```
+- Create the gateway
+```
+ceph-deploy rgw create files-rgw-01 files-rgw-02
+``` 
+- Normally, the gateway are running on 7480 port, you can change this port.
+- To change the default port add these line in your ~/ceph-cluster/ceph.conf (here i change the default port to 80)
+```
+[client.rgw.files-rgw-01]
+rgw_frontends = "civetweb port=80"
+
+[client.rgw.files-rgw-02]
+rgw_frontends = "civetweb port=80"
+```
+- And push the configuration to your gateway server
+```
+ceph-deploy --overwrite-conf config push files-rgw-01 files-rgw-02
+```
+- To apply this change you must restart manually the service on each gateway server with this command
+```
+systemctl restart ceph-radosgw.service
+```
