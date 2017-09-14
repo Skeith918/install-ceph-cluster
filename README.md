@@ -121,6 +121,15 @@ systemctl restart ceph-radosgw.service
 ### On the gateway servers
 #### User creation
 - You can access to the gateway with Amazon S3 or Openstack Swift. we create a user for these 2 platforms
+- Creation of S3 user
+```
+radosgw-admin user create --uid=ceph-s3-user --display-name="ceph-s3-user" --email=ceph-s3-user@example.com
+```
+- Creation of swift user
+```
+radosgw-admin subuser create --uid=ceph-swift-user --subuser=ceph-swift-user:swift --access=readwrite
+```
+
 ### On the files servers
 #### Erasure Code Profile creation
 - Create the erasure code profile named data with the data replication on 4 disks and a loss capacity of 2 disks
