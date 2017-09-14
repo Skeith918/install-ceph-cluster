@@ -31,7 +31,7 @@ ssh-keygen
 2.2.2.2   files-02
 3.3.3.3   files-03
 1.1.2.1   files-rgw-01
-1.1.2.3   files-rgw-02
+1.1.2.2   files-rgw-02
 ```
 - Add release key
 ```
@@ -46,4 +46,17 @@ echo deb https://download.ceph.com/debian-luminous/ jessie main | sudo tee /etc/
 apt update
 apt install ceph-deploy
 ```
-- Deploy 
+- Create a directory in your home path
+```
+mkdir ~/ceph-cluster
+```
+- Note that you must be in this directory to use ceph-deploy command
+- In your ceph-cluster directory, create your cluster with your 3 storage servers
+```
+ceph-deploy new files-01 files-02 files-03
+```
+- Install ceph luminous release in your servers
+```
+ceph-deploy install --release luminous files-01 files-02 files-03
+```
+
