@@ -6,7 +6,6 @@ This is an tutorial to install a ceph cluster
 
 ##### 3 servers for storage :
 - 3 disks on each server : 1 disk for system and 1 monitor, 1 disk for OSD = 2 OSD per servers = 6 disks and OSDs
-- A configuration to have a margin of loss of 2 disks out of 6.
 
 ##### 2 server for gateway
 ##### 1 server for admin
