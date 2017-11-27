@@ -42,7 +42,7 @@ ssh-keygen
 ```
 wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
 ```
-- Add the Ceph luminous packages to your repository (lasted at September 2017)
+- Add the Ceph luminous packages to your repository (latest at September 2017)
 ```
 echo deb https://download.ceph.com/debian-luminous/ jessie main >> /etc/apt/sources.list.d/ceph.list
 ```
