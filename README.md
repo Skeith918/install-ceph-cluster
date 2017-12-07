@@ -19,7 +19,9 @@ All servers working on Debian 8 and have a domain name.
 - Have a loss capacity of 2 drives without loss of data
 - Have 2 gateway in active-active mode to access cluster data
  
-## Installation
+# Installation
+
+## Manually
 
 ### On the Admin server
 
@@ -192,6 +194,6 @@ or
 ```
 ceph -w
 ```
-## Deployment with Ansible
+## Automatic with Ansible
 
 TODO
