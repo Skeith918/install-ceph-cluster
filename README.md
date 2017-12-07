@@ -192,3 +192,6 @@ or
 ```
 ceph -w
 ```
+## Deployment with Ansible
+
+TODO
